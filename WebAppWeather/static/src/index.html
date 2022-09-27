@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    @@include('html/head.html', {
+        "title":"AirTickets"
+        })
+<body>
+    <div class="wrapper">
+        @@include('html/header.html', {})
+        <main class="main-index main">
+            <div class="container">
+                <h1 class="title-index title">Поиск дешёвых билетов</h1>
+                <h2 class="title-additional title">Лёгкий способ купить авиабилеты дёшево</h2>
+                <button class="button-search button">Найти билеты</button>
+            </div>
+        </main>
+        @@include('html/footer.html', {})
+    </div>
+    @@include('html/popup-authorization.html', {})
+    @@include('html/popup-registration.html', {})
+    <script src="js/app.min.js"></script>
+</body>
+</html>
