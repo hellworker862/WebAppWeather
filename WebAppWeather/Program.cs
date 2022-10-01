@@ -1,5 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using WebAppWeather;
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
+
+
 
 app.UseDefaultFiles();
 app.UseStaticFiles();

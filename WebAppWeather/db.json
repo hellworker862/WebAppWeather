@@ -1,0 +1,99 @@
+[
+  {
+    "id": "RU",
+    "ruName": "Россия",
+    "enName": "Russia",
+    "regions": [
+      {
+        "id": 1,
+        "ruName": "Московская область",
+        "enName": "Moscow Oblast",
+        "citys": [
+          {
+            "id": 524894,
+            "ruName": "Москва",
+            "enName": "Moscow",
+            "lon": 37.60666700,
+            "lat": 55.76166500,
+            "regionId": 1,
+            "region": null
+          }
+        ],
+        "countryId": "RU",
+        "country": null
+      },
+      {
+        "id": 2,
+        "ruName": "Ленинградская область",
+        "enName": "Leninskaya Oblast",
+        "citys": [
+          {
+            "id": 498817,
+            "ruName": "Санкт-Петербруг",
+            "enName": "Saint Petersburg",
+            "lon": 30.26416800,
+            "lat": 59.89444400,
+            "regionId": 2,
+            "region": null
+          }
+        ],
+        "countryId": "RU",
+        "country": null
+      },
+      {
+        "id": 3,
+        "ruName": "Свердловская область",
+        "enName": "Sverdlovsk Oblast",
+        "citys": [
+          {
+            "id": 1486209,
+            "ruName": "Екатеринбург",
+            "enName": "Yekaterinburg",
+            "lon": 60.61249900,
+            "lat": 56.85749800,
+            "regionId": 3,
+            "region": null
+          }
+        ],
+        "countryId": "RU",
+        "country": null
+      },
+      {
+        "id": 4,
+        "ruName": "Приморский край",
+        "enName": "Primorsky Krai",
+        "citys": [
+          {
+            "id": 2013348,
+            "ruName": "Владивосток",
+            "enName": "Vladivostok",
+            "lon": 131.87353500,
+            "lat": 43.10562100,
+            "regionId": 4,
+            "region": null
+          }
+        ],
+        "countryId": "RU",
+        "country": null
+      },
+      {
+        "id": 5,
+        "ruName": "Новосибирская область",
+        "enName": "Novosibirskaya Oblast",
+        "citys": [
+          {
+            "id": 1496747,
+            "ruName": "Новосибирск",
+            "enName": "Novosibirsk",
+            "lon": 82.93444100,
+            "lat": 55.04111100,
+            "regionId": 5,
+            "region": null
+          }
+        ],
+        "countryId": "RU",
+        "country": null
+      }
+    ]
+  }
+]
