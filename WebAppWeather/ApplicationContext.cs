@@ -9,8 +9,9 @@ namespace WebAppWeather
         public DbSet<Region> Regions => Set<Region>();
         public DbSet<City> Cities => Set<City>();
 
-        public ApplicationContext()
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
