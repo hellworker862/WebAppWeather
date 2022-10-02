@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace WebAppWeather.Models.Weather
 {
@@ -8,11 +10,12 @@ namespace WebAppWeather.Models.Weather
         {
 
         }
-        [JsonPropertyName("speed")]
+
+        [JsonProperty(PropertyName = "speed")]
         public double Speed { get; set; }
-        [JsonPropertyName("deg")]
+        [JsonProperty(PropertyName = "deg")]
         public int Degrees { get; set; }
-        [JsonPropertyName("gust")]
+        [JsonProperty(PropertyName = "gust")]
         public double Gust { get; set; }
     }
 }

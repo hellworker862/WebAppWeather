@@ -1,19 +1,34 @@
-﻿using System.Text.Json.Serialization;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+using static System.Net.Mime.MediaTypeNames;
+using System.Text.RegularExpressions;
 
 namespace WebAppWeather.Models.Weather
 {
     public class Weather
     {
-        public Weather()
-        {
+        private string description;
 
+        public Weather(string name, string description, string icon)
+        {
+            Name = name;
+            Description = description;
+            Icon = icon;    
         }
 
-        [JsonPropertyName("main")]
+        [JsonProperty(PropertyName = "main")]
         public string Name { get; set; }
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
-        [JsonPropertyName("icon")]
+        [JsonProperty(PropertyName = "description")]
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                description = char.ToUpper(value[0]) + value.Substring(1); ;
+            }
+        }
+        [JsonProperty(PropertyName = "icon")]
         public string Icon { get; set; }
     }
 }

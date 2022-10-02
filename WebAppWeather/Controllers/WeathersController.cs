@@ -1,36 +1,50 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebAppWeather.Controllers.Interfaces;
-using WebAppWeather.Enums;
 using WebAppWeather.Models.Weather;
+using WebAppWeather.Services;
 
 namespace WebAppWeather.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class WeathersController : ControllerBase, IWeathersController
     {
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<CurrentWeather>>> GetCurrentWeather(params int[] id)
+        private WeathersService _weathersService;
+
+        public WeathersController(WeathersService weathersService)
         {
-            throw new NotImplementedException();
+            _weathersService = weathersService;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CurrentWeather>> GetCurrentWeather(int id)
+        {
+            var weather = await _weathersService.GetCurrentWeather(id);
+            if (weather == null)
+                return NotFound();
+
+            return Ok(weather);
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetMapLayer(double x, double y, MapLayerEnum mapLayer = MapLayerEnum.All)
+        public async Task<ActionResult<IEnumerable<CurrentWeather>>> GetListCurrentWeather([FromQuery] int[] id)
         {
-            throw new NotImplementedException();
-        }
+            if (id.Length == 0)
+                return BadRequest();
 
-        [HttpGet]
-        public async Task<ActionResult> GetMapsRussia()
-        {
-            throw new NotImplementedException();
-        }
+            var list = new List<CurrentWeather>();
 
-        [HttpGet]
-        public async Task<ActionResult> GetWeatherForecast(int id, int cnt)
-        {
-            throw new NotImplementedException();
+            for (int i = 0; i < id.Length; i++)
+            {
+                var weather = await _weathersService.GetCurrentWeather(id[i]);
+                if (weather == null)
+                    return NotFound();
+
+                list.Add(weather);
+            }
+
+            return Ok(list);
         }
     }
+
 }
