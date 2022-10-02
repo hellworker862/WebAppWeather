@@ -2,6 +2,7 @@
     --colorT: #4593f9;
     --colorB: #dceaff;
     --colorA: #afafb3;
+    --colorC: rgba(71, 147, 255, 0.2);
 }
 
 *,
@@ -16,7 +17,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f6f6f6;
+    background-color: #fff;
 }
 
 a {
@@ -137,7 +138,7 @@ a {
     border-radius: 20px;
     height: 250px;
     padding: 10px;
-    background-color: var(--colorB);
+    background-color: var(--colorC);
     margin: 20px 5px;
 }
 

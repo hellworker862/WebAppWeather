@@ -9,6 +9,8 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 
 var app = builder.Build();
 
+app.UseHsts();
+app.UseHttpsRedirection();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 app.MapControllers();
