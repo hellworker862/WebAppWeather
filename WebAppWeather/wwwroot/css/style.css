@@ -2,6 +2,7 @@
     --colorT: #4593f9;
     --colorB: #dceaff;
     --colorA: #afafb3;
+    --colorC: rgba(71, 147, 255, 0.2);
 }
 
 *,
@@ -16,7 +17,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f6f6f6;
+    background-color: #fff;
 }
 
 a {
@@ -137,7 +138,7 @@ a {
     border-radius: 20px;
     height: 250px;
     padding: 10px;
-    background-color: var(--colorB);
+    background-color: var(--colorC);
     margin: 20px 5px;
 }
 
@@ -147,6 +148,7 @@ a {
 }
 
 .city-card{
+    max-width: 200px;
     position: relative;
     justify-content: space-between;
     padding-top: 30px;
@@ -165,16 +167,12 @@ a {
     font-size: 25px;
 }
 
-.additionally{
-    color: var(--colorA);
+.type-weather{
+    text-align: center;
 }
 
-.content-bx{
-    position: absolute;
-    top: -50%;
-    display: flex;
-    flex-direction: column;
-
+.additionally{
+    color: var(--colorA);
 }
 
 

@@ -27,5 +27,9 @@ namespace WebAppWeather.Models.Weather
         public System System { get; set; }
         [JsonProperty(PropertyName = "timezone")]
         public int TimeZone { get; set; }
+        [JsonProperty(PropertyName = "id")]
+        public int Id { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
     }
 }

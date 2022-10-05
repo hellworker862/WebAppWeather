@@ -148,6 +148,7 @@ a {
 }
 
 .city-card{
+    max-width: 200px;
     position: relative;
     justify-content: space-between;
     padding-top: 30px;
@@ -166,16 +167,12 @@ a {
     font-size: 25px;
 }
 
-.additionally{
-    color: var(--colorA);
+.type-weather{
+    text-align: center;
 }
 
-.content-bx{
-    position: absolute;
-    top: -50%;
-    display: flex;
-    flex-direction: column;
-
+.additionally{
+    color: var(--colorA);
 }
 
 
