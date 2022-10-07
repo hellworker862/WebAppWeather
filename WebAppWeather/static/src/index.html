@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html lang="ru">
-    @@include('html/head.html', {
-        "title":"Weather"
-        })
+@@include('html/head.html', {
+"title":"Weather"
+})
+
 <body>
     <div class="wrapper">
         @@include('html/header.html', {})
         <main class="main">
-            <div class="container">
-                <div class="content-group">
-                    <h2 class="group-title title">Основные города России</h2>
-                    <div id="cards-container" class="group-cards">
-                    </div>
-                </div>
-            
-            </div>
         </main>
         @@include('html/footer.html', {})
+
+        <div id="preloader" class="preloader">
+            <div class="preloader-loader">
+                <div class="loadingio-spinner-dual-ring-x2mkp0y4etg">
+                    <div class="ldio-8gofurdxidl">
+                        <div></div>
+                        <div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#preloader.preloader -->
     </div>
     <script src="js/app.min.js"></script>
 </body>
+
 </html>

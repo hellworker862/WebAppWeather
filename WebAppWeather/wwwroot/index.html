@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -9,16 +9,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <title>Weather</title>
 </head>
+
 
 <body>
     <div class="wrapper">
         <header class="header">
     <div class="container">
         <div class="header-row">
-            <a href="#" class="header-logo">
+            <a data-url="weather" class="header-logo to-weather nav-link">
                 <img src="../img/cloudy.png" alt="Логотип" width="55" height="55">
                 <span class="logo-text">Weather Forecast</span>
             </a>
@@ -33,21 +35,28 @@
     </div>
 </header>
         <main class="main">
-            <div class="container">
-                <div class="content-group">
-                    <h2 class="group-title title">Основные города России</h2>
-                    <div id="cards-container" class="group-cards">
-                    </div>
-                </div>
-            
-            </div>
         </main>
         <footer class="footer">
     <div class="container">
         
     </div>
 </footer>
+
+        <div id="preloader" class="preloader">
+            <div class="preloader-loader">
+                <div class="loadingio-spinner-dual-ring-x2mkp0y4etg">
+                    <div class="ldio-8gofurdxidl">
+                        <div></div>
+                        <div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#preloader.preloader -->
     </div>
     <script src="js/app.min.js"></script>
 </body>
+
 </html>

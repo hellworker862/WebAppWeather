@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using WebAppWeather;
 using WebAppWeather.Controllers;
@@ -25,6 +26,9 @@ var app = builder.Build();
 //    options.RoutePrefix = string.Empty;
 //});
 
+var options = new RewriteOptions().Add(RewritePHPRequests);
+
+app.UseRewriter(options);
 app.UseRouting();
 app.UseHsts();
 app.UseHttpsRedirection();
@@ -39,4 +43,16 @@ app.UseEndpoints(endpoints =>
 
 
 app.Run();
+
+static void RewritePHPRequests(RewriteContext context)
+{
+    var path = context.HttpContext.Request.Path;
+    var pathValue = path.Value; // запрошенный путь
+                                // если запрос к папке html, возвращаем ошибку 404
+    if (path.StartsWithSegments(new PathString("/home")) || path.StartsWithSegments(new PathString("/weather")))
+    {
+        string proccedPath = "/";
+        context.HttpContext.Request.Path = new PathString("/");
+    }
+}
 

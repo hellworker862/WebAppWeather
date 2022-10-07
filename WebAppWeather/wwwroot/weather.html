@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <title>Weather</title>
 </head>
@@ -18,7 +19,7 @@
         <header class="header">
     <div class="container">
         <div class="header-row">
-            <a href="#" class="header-logo">
+            <a data-url="weather" class="header-logo to-weather nav-link">
                 <img src="../img/cloudy.png" alt="Логотип" width="55" height="55">
                 <span class="logo-text">Weather Forecast</span>
             </a>
@@ -52,12 +53,32 @@
                                 <div class="city-string">
                                     <span class="city-text">Город:</span>
                                     <span class="city">Санкт-Петербург</span>
+                                    <img src="./img/cloud-bg.png" alt="Задний фон облака">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="content-group this-info">
-                        
+                        <ul class="list-info">
+                            <div class="item-info">
+                                <div class="icon-info"><img src="./img/info-icon/thermometer.svg" alt="термометер"></div>
+                                <span class="title-text">Температура</span>
+                                <span class="value-info">20° - ощущается как 17°</span>
+                            </div>
+                            <div class="item-info">
+                                <img src="./img/info-icon/humidity.svg" alt="капля">
+                                <span class="title-text">Давление</span>
+                            </div>
+                            <div class="item-info">
+                                <img src="./img/info-icon/evaporator.svg" alt="осадки">
+                                <span class="title-text">Осадки</span>
+                            </div>
+                            <div class="item-info">
+                                <img src="./img/info-icon/wind.svg" alt="ветер">
+                                <span class="title-text">Ветер</span>
+                            </div>
+                        </ul>
+                        <div class="value-block"></div>
                     </div>
                 </div>
             </div>

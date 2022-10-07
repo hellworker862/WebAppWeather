@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Newtonsoft.Json;
-using System.Text.Json.Serialization;
-using static System.Net.Mime.MediaTypeNames;
-using System.Text.RegularExpressions;
+﻿using Newtonsoft.Json;
 
 namespace WebAppWeather.Models.Weather
 {
@@ -14,7 +10,7 @@ namespace WebAppWeather.Models.Weather
         {
             Name = name;
             Description = description;
-            Icon = icon;    
+            Icon = icon;
         }
 
         [JsonProperty(PropertyName = "main")]
