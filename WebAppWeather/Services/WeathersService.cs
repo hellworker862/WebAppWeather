@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
-using WebAppWeather.Models.Weather;
+using WebAppWeather.Models.Weather.Data.Current;
+using WebAppWeather.Models.Weather.View.Current;
 
 namespace WebAppWeather.Services
 {
@@ -9,15 +10,17 @@ namespace WebAppWeather.Services
         private readonly HttpClient _httpClient;
         private ApplicationContext _context;
         private IConfiguration _configuration;
+        private WeatherConvert _weatherConvert;
 
-        public WeathersService(HttpClient httpClient, ApplicationContext context, IConfiguration configuration)
+        public WeathersService(HttpClient httpClient, ApplicationContext context, IConfiguration configuration, WeatherConvert weatherConvert)
         {
             _httpClient = httpClient;
             _context = context;
             _configuration = configuration;
+            _weatherConvert = weatherConvert;
         }
 
-        public async Task<CurrentWeather> GetCurrentWeather(int id)
+        public async Task<CurrentWeatherView> GetCurrentWeather(int id)
         {
             var city = _context.Cities.FirstOrDefault(x => x.Id == id);
 
@@ -32,7 +35,7 @@ namespace WebAppWeather.Services
             var stringTask = await _httpClient.GetStringAsync(stringHref + stringRequest);
             var weather = JsonConvert.DeserializeObject<CurrentWeather>(stringTask);
 
-            return weather;
+            return _weatherConvert.CurrentWeatherConvert(weather);
         }
     }
 }

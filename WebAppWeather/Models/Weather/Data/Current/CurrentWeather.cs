@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace WebAppWeather.Models.Weather
+namespace WebAppWeather.Models.Weather.Data.Current
 {
     public class CurrentWeather
     {
@@ -13,8 +13,6 @@ namespace WebAppWeather.Models.Weather
         public IEnumerable<Weather> Weather { get; set; }
         [JsonProperty(PropertyName = "main")]
         public Main Main { get; set; }
-        [JsonProperty(PropertyName = "visibility")]
-        public int Visibility { get; set; }
         [JsonProperty(PropertyName = "wind")]
         public Wind Wind { get; set; }
         [JsonProperty(PropertyName = "clouds")]

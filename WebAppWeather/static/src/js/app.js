@@ -1,4 +1,7 @@
-import { popups} from "./modules/popups.js"
+import { popups } from "./modules/popups.js"
+import {weatherTemplate} from './pages/weather.js'
+import { checkPageName } from './helpers/check-page-name.js'
+
 var preloader = document.querySelector('#preloader');
 
 class App {
@@ -11,111 +14,79 @@ class App {
       this.$nav = document.querySelector('.nav-link')
   
       this.route = this.route.bind(this)
-      // привязываем метод отображения поста
-      // данный метод будет вызываться при клике по посту
+
       this.showWeather = this.showWeather.bind(this)
   
-      this.#initApp(this.#page)
+      this.#initApp()
     }
   
-    #initApp({ url }) {
+    #initApp() {
+      const { url } = this.#page
+
       history.replaceState({ page: `${url}` }, `${url} page`, url)
   
       this.#render(this.#page)
   
-      this.$nav.addEventListener('click', this.route)
+      this.$nav.addEventListener('click', this.route, {passive: true})
   
       window.addEventListener('popstate', async ({ state }) => {
-        // получаем адрес предыдущей страницы
-        const { page } = state
+
+        const pageName = state.page
+
+        this.#page = await checkPageName(pageName) 
   
-        // если адрес содержит post
-        if (page.includes('post')) {
-          // извлекаем идентификатор
-          const id = page.replace('post#', '')
-          // присваиваем текущей странице объект найденного поста
-          this.#page = await findPost(id)
-        } else {
-          // иначе, получаем модуль поста
-          const newPage = await import(`./pages/${state.page}.js`)
-          // присваиваем текущей странице объект предыдущей страницы
-          this.#page = newPage.default
-        }
-  
-        this.#savePage(this.#page);
         this.#render(this.#page)
+        this.#savePage(this.#page);
       })
+    }
+
+    async route({ target }) {
+      if (target.tagName !== 'A' && target.tagName !== 'ARTICLE') return
+
+      const  link  = target.dataset.url
+      if(this.#page.url === link) return
+
+      this.#page = await checkPageName(link)
+  
+      preloader.classList.remove('preloader-hide');
+
+      this.#render(this.#page)
+      this.#savePage(this.#page)
     }
   
     async #render({ content }) {
       unload();
-      this.$container.innerHTML =
-        // проверяем, является ли контент строкой,
-        // т.е. является он статическим или динамическим
-        typeof content === 'string' ? content : await content()
+      this.$container.innerHTML = typeof content === 'string' ? content : await content()
         
       load()
-      // после рендеринга регистрируем обработчик клика по посту на контейнере
-      this.$container.addEventListener('click', this.showPost)
-    }
-  
-    async route({ target }) {
-      if (target.tagName !== 'A') return
-
-      const { url } = target.dataset
-      if (this.#page.url === url) return
-  
-      const newPage = await import(`./pages/${url}.js`)
-      console.log(newPage)
-      this.#page = newPage.default
-  
-      preloader.classList.remove('preloader-hide');
-      this.#render(this.#page)
-  
-      this.#savePage(this.#page)
+      this.$container.addEventListener('click', this.showWeather)
     }
   
     // метод отображения поста
     async showWeather({ target }) {
-      // нас интересуте только клик по посту
-      // помните эту строку в стилях: div > article > * { pointer-events: none; } ?
-      // это позволяет сделать так, чтобы элементы, вложенные в article,
-      // не были кликабельными, т.е. не являлись e.target
       if (target.tagName !== 'ARTICLE') return
   
-      // присваиваем текущей странице объект найденного поста
-      this.#page = await findPost(target.id)
+      this.#page = await checkPageName(target.dataset.url) 
   
       this.#render(this.#page)
-  
       this.#savePage(this.#page)
     }
   
     #savePage({ url }) {
-      history.pushState({ page: `${url}` }, `${url} page`, url)
-  
+      history.pushState({ pageName: `${url}` }, `${url} page`, url)
+
       localStorage.setItem('pageName', JSON.stringify(url))
     }
   };
   
   (async () => {
-    const container = document.querySelector('main')
-  
-    const pageName = JSON.parse(localStorage.getItem('pageName')) ?? 'home'
-  
-    let pageToRender = ''
-  
-    // содержит ли название страницы слово "post" и т.д.
-    // см. обработку popstate
-    if (pageName.includes('post')) {
-      const id = pageName.replace('post#', '')
-  
-      pageToRender = await findPost(id)
-    } else {
-      const pageModule = await import(`./pages/${pageName}.js`)
-  
-      pageToRender = pageModule.default
-    }
+    const container = document.querySelector('main');
+    if(localStorage.getItem('pageName') === 'undefined')
+        localStorage.setItem('pageName', JSON.stringify('home'))
+
+    const pageName = JSON.parse(localStorage.getItem('pageName')) ?? 'home';
+    const pageToRender = await checkPageName(pageName)
+
     new App(container, pageToRender)
   })()
 

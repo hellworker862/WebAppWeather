@@ -1,5 +1,6 @@
 import {cityCardTemplate} from '../templates/city-card.js'
 import {getCurrentWeatherList} from '../modules/weather.js'
+import weather from './weather.js';
 
 export default {
   content: async () => {

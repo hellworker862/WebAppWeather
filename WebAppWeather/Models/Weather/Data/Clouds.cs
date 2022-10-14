@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace WebAppWeather.Models.Weather
+namespace WebAppWeather.Models.Weather.Data
 {
     public class Clouds
     {

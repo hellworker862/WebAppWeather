@@ -13,3 +13,15 @@ export async function getCurrentWeatherList() {
         }
     }).then(response => response.json());
 }
+
+export async function findWeather(id) {
+    var request = "/api/weathers/" + id;
+
+    return await fetch(request, {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json());
+}

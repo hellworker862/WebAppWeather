@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebAppWeather.Controllers.Interfaces;
-using WebAppWeather.Models.Weather;
+using WebAppWeather.Models.Weather.Data.Current;
+using WebAppWeather.Models.Weather.View.Current;
 using WebAppWeather.Services;
 
 namespace WebAppWeather.Controllers
@@ -17,7 +18,7 @@ namespace WebAppWeather.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<CurrentWeather>> GetCurrentWeather(int id)
+        public async Task<ActionResult<CurrentWeatherView>> GetCurrentWeather(int id)
         {
             var weather = await _weathersService.GetCurrentWeather(id);
             if (weather == null)
@@ -27,12 +28,12 @@ namespace WebAppWeather.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CurrentWeather>>> GetListCurrentWeather([FromQuery] int[] id)
+        public async Task<ActionResult<IEnumerable<CurrentWeatherView>>> GetListCurrentWeather([FromQuery] int[] id)
         {
             if (id.Length == 0)
                 return BadRequest();
 
-            var list = new List<CurrentWeather>();
+            var list = new List<CurrentWeatherView>();
 
             for (int i = 0; i < id.Length; i++)
             {
