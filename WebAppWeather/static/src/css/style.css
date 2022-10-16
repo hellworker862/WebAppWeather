@@ -34,12 +34,12 @@ a {
 
 ::-webkit-scrollbar-track {
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.25) inset;
-    border-radius: 8px;
+    border-radius: 100px;
 }
 
 ::-webkit-scrollbar-thumb {
     background: var(--colorT);
-    border-radius: 8px;
+    border-radius: 100px;
 }
 
 .wrapper {
@@ -81,6 +81,7 @@ header {
 }
 
 .search-box {
+    position: relative;
     display: flex;
     align-items: center;
     background: var(--colorB);
@@ -116,6 +117,44 @@ header {
     font-size: 16px;
     transition: 0.4s;
     width: 0px;
+}
+
+.values-box{
+    margin: 50px 50px 0px 20px;
+    top: 0;
+    left: 0;
+    position: absolute;
+    max-height: 0px;
+    background-color: white;
+    border-bottom: var(--colorT) solid 1px;
+    border-left: var(--colorT) solid 1px;
+    border-right: var(--colorT) solid 1px;
+    width: 0px;
+    border-radius: 0 0 15px 15px;
+    opacity:0;
+    transition: 0.4s;
+    overflow-y: auto;
+}
+
+.dop{
+    font-size: 12px;
+}
+
+.search-box:hover > .values-box{
+    opacity:1;
+    max-height: 200px;
+    width: 250px;
+}
+
+.search-item{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-item:hover {
+    background-color: #e8e9eb;
 }
 
 .content-group {

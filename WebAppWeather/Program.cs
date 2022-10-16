@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<HttpClient>();
 builder.Services.AddTransient<WeatherConvert>();
+builder.Services.AddTransient<SearchService>();
 builder.Services.AddScoped<WeathersService>();
 builder.Services.AddScoped<IWeathersController, WeathersController>();
 

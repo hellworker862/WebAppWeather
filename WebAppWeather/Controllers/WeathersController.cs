@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebAppWeather.Controllers.Interfaces;
-using WebAppWeather.Models.Weather.Data.Current;
+using WebAppWeather.Models.Places;
 using WebAppWeather.Models.Weather.View.Current;
 using WebAppWeather.Services;
 
@@ -11,10 +11,20 @@ namespace WebAppWeather.Controllers
     public class WeathersController : ControllerBase, IWeathersController
     {
         private WeathersService _weathersService;
+        private SearchService _searchService;
 
-        public WeathersController(WeathersService weathersService)
+        public WeathersController(WeathersService weathersService, SearchService searchService)
         {
             _weathersService = weathersService;
+            _searchService = searchService;
+        }
+
+        [HttpGet("cities/{searchString}")]
+        public async Task<ActionResult<IEnumerable<City>>> GetCitysBySeachString(string searchString)
+        {
+            var cities = await _searchService.SearchCity(searchString);
+
+            return Ok(cities);
         }
 
         [HttpGet("{id}")]

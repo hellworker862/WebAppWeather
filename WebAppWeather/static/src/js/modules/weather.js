@@ -25,3 +25,15 @@ export async function findWeather(id) {
         }
     }).then(response => response.json());
 }
+
+export async function findCity(searchString) {
+    var request = "/api/weathers/cities/" + searchString;
+
+    return await fetch(request, {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json());
+}
