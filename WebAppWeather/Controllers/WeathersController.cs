@@ -56,6 +56,16 @@ namespace WebAppWeather.Controllers
 
             return Ok(list);
         }
+
+        [HttpGet("forecast/{id}")]
+        public async Task<ActionResult> GetWeatherForecast(int id)
+        {
+            var forecast = await _weathersService.GetWeatherForecast(id);
+            if (forecast == null)
+                return NotFound();
+
+            return Ok(forecast);
+        }
     }
 
 }

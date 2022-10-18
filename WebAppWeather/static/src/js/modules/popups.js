@@ -1,7 +1,5 @@
 const popupLinks = document.querySelectorAll('.popup-link');
 const body = document.querySelector('body');
-const main = document.querySelector('main');
-const footer = document.querySelector('footer');
 const lockPadding = document.querySelectorAll(".lock-padding");
 
 let unlock = true;
@@ -36,7 +34,7 @@ if(popupCloseIcon.length > 0) {
     }
 }
 
-function popupOpen(curentPopup) {
+export function popupOpen(curentPopup) {
     if(curentPopup && unlock) {
         const popupActive = document.querySelector('.popup.open-popup');
         if(popupActive){
@@ -45,10 +43,15 @@ function popupOpen(curentPopup) {
             bodyLock();
         }
         curentPopup.classList.add('open-popup');
+        curentPopup.addEventListener("click", function (e) {
+            if(!e.target.closest('.popup-content')) {
+                popupClose(e.target.closest('.popup'));
+            }
+        })
     }
 }
 
-function popupClose(popupActive, doUnlock = true) {
+export function popupClose(popupActive, doUnlock = true) {
     if(unlock) {
         popupActive.classList.remove('open-popup');
         if(doUnlock){
@@ -59,12 +62,13 @@ function popupClose(popupActive, doUnlock = true) {
 
 function bodyLock() {
     const lockPaddingValue = window.innerWidth - document.querySelector('.wrapper').offsetWidth + 'px';
-    for(let index = 0; index < lockPadding.length; index++){
-        const el =  lockPadding[index];
-        el.style.paddingRight = lockPaddingValue;
+    if (lockPadding.length > 0) {
+        for(let index = 0; index < lockPadding.length; index++){
+            const el =  lockPadding[index];
+            el.style.paddingRight = lockPaddingValue;
+        }
     }
-    main.style.paddingRight = lockPaddingValue;
-    footer.style.paddingRight = lockPaddingValue;
+    body.style.paddingRight = lockPaddingValue;
     body.classList.add('lock');
 
     unlock = false;
@@ -75,12 +79,13 @@ function bodyLock() {
 
 function bodyUnLock() {
     setTimeout( function () {
-        for (let index = 0; index < lockPadding.length; index++){
-            const el = lockPadding[index];
-            el.style.paddingRight = '0px';
+        if(lockPadding.length > 0) {
+            for (let index = 0; index < lockPadding.length; index++){
+                const el = lockPadding[index];
+                el.style.paddingRight = '0px';
+            }
         }
-        main.style.paddingRight = '0px';
-        footer.style.paddingRight = '0px';
+        body.style.paddingRight = '0px';
         body.classList.remove('lock');
     }, timeout);
 

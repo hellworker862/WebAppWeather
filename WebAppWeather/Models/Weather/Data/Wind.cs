@@ -11,7 +11,7 @@ namespace WebAppWeather.Models.Weather.Data
             Degrees = degrees;
             Gust = gust;
 
-            WindType = gust switch
+            WindType = speed switch
             {
                 var n when (n <= 1) => WindTypeEnum.Calm,
                 var n when (n <= 5) => WindTypeEnum.Quiet,

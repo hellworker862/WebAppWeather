@@ -1,7 +1,16 @@
 :root {
+    --dark-theme-color:#fff;
+    --datk-theme-bg: #000;
+    --dark-theme-bg-container:#4F4F4F;
+    --dark-theme-bg-card:#2E3035;
+
+    --color:#000;
+    --color-bg-card:#dceaff;
+    --color-bg-container: #fff;
+    --color-bg: #fff;
     --colorT: #4593f9;
     --colorB: #dceaff;
-    --colorA: #afafb3;
+    --colorA: #939CB0;
     --colorC: rgba(71, 147, 255, 0.2);
 }
 
@@ -17,7 +26,28 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #fff;
+    background-color: var(--color-bg);
+    color: var(--color);
+}
+
+body.lock {
+    overflow: hidden;
+}
+
+body.theme-dark {
+    --color-bg-card: var(--dark-theme-bg-card);
+    --color-bg: var(--datk-theme-bg);
+    --color-bg-container: var(--dark-theme-bg-container);
+    --color: var(--dark-theme-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    body.theme-auto {
+        --color-bg-card: var(--dark-theme-bg-card);
+        --color-bg: var(--datk-theme-bg);
+        --color-bg-container: var(--dark-theme-bg-container);
+        --color: var(--dark-theme-color);
+    }
 }
 
 a {
@@ -119,6 +149,19 @@ header {
     width: 0px;
 }
 
+.rigth-box {
+    display: flex;
+    align-items: center;
+}
+
+.theme-button{
+    display: flex;
+    background-color: transparent;
+    margin-right: 20px;
+    cursor: pointer;
+    padding: 5px;
+}
+
 .values-box{
     margin: 50px 50px 0px 20px;
     top: 0;
@@ -147,6 +190,7 @@ header {
 }
 
 .search-item{
+    color: #000;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -161,6 +205,7 @@ header {
     padding: 20px;
     box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.3);
     border-radius: 20px;
+    background-color: var(--color-bg-container);
 }
 
 .group-title {
@@ -181,7 +226,7 @@ header {
     border-radius: 20px;
     height: 250px;
     padding: 10px;
-    background-color: var(--colorC);
+    background-color: var(--color-bg-card);
     margin: 20px 5px;
 }
 
@@ -201,7 +246,20 @@ header {
     flex-direction: column;
 }
 
-.city-card:hover {
+.favorites-group {
+    margin-top: 50px;
+}
+
+.favorites-cards {
+    display: flex;
+}
+
+.none-cards {
+    padding: 20px;
+    font-size: 20px;
+}
+
+.card:hover {
     cursor: pointer;
 }
 
@@ -248,7 +306,7 @@ header {
     margin-top: 26px;
 }
 
-.date {
+.date-title {
     font-weight: 400;
     font-size: 40px;
     line-height: 49px;
@@ -269,6 +327,7 @@ header {
 
 .this {
     margin-right: 50px;
+    position: relative;
 }
 
 .this-info {
@@ -314,6 +373,26 @@ header {
     align-items: center;
     display: flex;
     justify-content: center;
+    background-color: #fff;
+}
+
+.button-favorite {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 20px;
+    margin-right: 20px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.button-favorite>* {
+    pointer-events: none;
+}
+
+.button-favorite img{
+    height: 40px;
+    width: 40px;
 }
 
 .nav-link {
@@ -335,7 +414,7 @@ a.nav-link>* {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color: var(--color-bg);
 }
 
 .preloader-loader {
@@ -430,13 +509,150 @@ a.nav-link>* {
     transform: translateZ(0) scale(1);
     backface-visibility: hidden;
     transform-origin: 0 0;
-    /* see note above */
 }
 
 .ldio-8gofurdxidl div {
     box-sizing: content-box;
 }
 
+.forecast{
+    margin-top: 50px;
+}
+
+.forecast-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+}
+
+.forecast-icon {
+    width: 55px;
+    height: 55px;
+    margin-bottom: 15px;
+}
+
+.week-day {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.date{
+    font-size: 14px;
+}
+
+.temperature-max {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.date {
+    margin: 10px 0px 15px 0px;
+}
+
+.charts {
+    margin-top: 20px;
+}
+
+#chart {
+    width: 100%;
+    height: 500px;
+    border-radius: 15px;
+}
+
+.charts-settings {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form_radio_btn {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.form_radio_btn input[type=radio] {
+	display: none;
+}
+
+.form_radio_btn label {
+	display: inline-block;
+	cursor: pointer;
+	padding: 7px 20px;
+	background-color: var(--color-bg-container);
+    box-shadow: 2px 5px 25px -3px rgba(180, 180, 180, 0.25);
+    border-radius: 5px;
+	user-select: none;
+}
+
+.form_radio_btn input[type=radio]:checked + label {
+	background: var(--colorT);
+    color: #fff;
+}
+
+.form_radio_btn label:hover {
+	color: #999;
+}
+
+.form_radio_btn input[type=radio]:disabled + label {
+	background: #efefef;
+	color: #666;
+}
+
 footer {
     margin-top: 20px;
+}
+
+.popup{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: all 0.8s ease 0s;
+}
+
+.popup.open-popup{
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup.open-popup .popup-content{
+    transform: translate(0px, 0);
+    opacity: 1;
+}
+
+.popup-body{
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 10px;
+}
+
+.popup-content{
+    background-color: transparent;
+    position: relative;
+    padding: 30px;
+    opacity: 0;
+    transition: all 0.8s ease 0s;
+    transform: translate(0px, -100%);
+}
+
+.popup-close{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.popup-content > .this-info{
+    background-color: var(--color-bg-container);
 }

@@ -1,7 +1,8 @@
-export async function getCurrentWeatherList() {
+export async function getCurrentWeatherList(arr) {
     var request = "/api/weathers?";
 
-    for (const n of arguments)
+    if(arr.length > 0) {
+        for (const n of arr)
         request = request + "id=" + n + '&';
     request.slice(0, -1);
 
@@ -12,6 +13,9 @@ export async function getCurrentWeatherList() {
             'Content-Type': 'application/json'
         }
     }).then(response => response.json());
+    }
+
+    [];
 }
 
 export async function findWeather(id) {
@@ -28,6 +32,18 @@ export async function findWeather(id) {
 
 export async function findCity(searchString) {
     var request = "/api/weathers/cities/" + searchString;
+
+    return await fetch(request, {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json());
+}
+
+export async function findForecast(id) {
+    var request = "/api/weathers/forecast/" + id;
 
     return await fetch(request, {
         method: "GET",

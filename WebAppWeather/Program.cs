@@ -40,7 +40,7 @@ app.UseStaticFiles();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllers(); // подключаем маршрутизацию на контроллеры
+    endpoints.MapControllers();
 });
 
 
@@ -49,8 +49,8 @@ app.Run();
 static void RewritePHPRequests(RewriteContext context)
 {
     var path = context.HttpContext.Request.Path;
-    var pathValue = path.Value; // запрошенный путь
-                                // если запрос к папке html, возвращаем ошибку 404
+    var pathValue = path.Value;
+
     if (path.StartsWithSegments(new PathString("/home")) || path.StartsWithSegments(new PathString("/weather")))
     {
         string proccedPath = "/";

@@ -9,9 +9,8 @@ namespace WebAppWeather.Controllers.Interfaces
     {
         Task<ActionResult<CurrentWeatherView>> GetCurrentWeather(int id);
         Task<ActionResult<IEnumerable<CurrentWeatherView>>> GetListCurrentWeather(int[] ids);
-
         Task<ActionResult<IEnumerable<City>>> GetCitysBySeachString(string searchString);
-        //Task<ActionResult> GetWeatherForecast(int id, int cnt);
+        Task<ActionResult> GetWeatherForecast(int id);
         //Task<ActionResult> GetMapLayer(double x, double y, MapLayerEnum mapLayer = MapLayerEnum.All);
         //Task<ActionResult> GetMapsRussia();
     }

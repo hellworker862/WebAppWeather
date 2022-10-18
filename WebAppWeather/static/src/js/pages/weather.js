@@ -1,20 +1,37 @@
-import {findWeather} from '../modules/weather.js'
+import {findForecast, findWeather} from '../modules/weather.js'
+import { forecastCardTemplate } from '../templates/forecast-card.js';
+
 
 export default function(id) {
     return {
         content: async () => {
             const weather = await findWeather(id);
+            const forecast = await findForecast(id);
+
+            let favorites = JSON.parse(localStorage.getItem("favorites")) ?? [];
+            let src;
+
+            if(favorites.includes(id)) {
+                src="../img/star1.svg"
+            } else {
+                src="../img/star0.svg"
+            }
+
+            window.globalVar = forecast;
+
          return   `
         <div class="container">
             <div class="row">
                 <div class="content-group this">
                     <div class="weather-box">
+                    <button class="button-favorite" data-id="${id}">
+                        <img src="${src}" alt="кнопка фаворита">
+                    </button>
                         <div class="weather-box-row">
                             <div class="weather-box-column">
                                 <span class="temperature">
-                                    ${weather.weather.main.temperature < 0 ? weather.weather.main.temperature : '+' + weather.weather.main.temperature}
-                                    °</span>
-                                <span class="date">Сегодня</span>
+                                    ${weather.weather.main.temperature < 0 ? weather.weather.main.temperature : '+' + weather.weather.main.temperature}°</span>
+                                <span class="date-title">Сегодня</span>
                             </div>
                             <img class="weather-icon big-icon" src="./img/weather-icon/${weather.weather.icon}.svg"></img>
                         </div>
@@ -68,7 +85,55 @@ export default function(id) {
                     </div>
                 </div>
             </div>
-        </div>`},
+            <div class="content-group forecast">
+                <h2 class="group-title title">Прогноз погоды на 5 дней</h2>
+                <div id="cards-container" class="group-cards">
+                    ${
+                        forecast.daysForecasts.reduce((html, weather) => (html+= forecastCardTemplate(weather).content), '')
+                    }
+                </div>
+            </div>
+
+            <div class="charts-settings">
+                <div class="fieldset fieldset-type">
+                    <div class="form_radio_btn">
+                        <input class="item-settings" type="radio" value="temperature" id="temperature" name="group-type" checked >
+                        <label for="temperature">Температура</label>
+                    </div>
+                    <div class="form_radio_btn">
+                        <input class="item-settings" type="radio" value="pressure" id="pressure" name="group-type">
+                        <label for="pressure">Давление</label>
+                    </div>
+                    <div class="form_radio_btn">
+                        <input class="item-settings" type="radio" value="humidity" id="humidity" name="group-type">
+                        <label for="humidity">Влажность</label>
+                    </div>
+                </div>
+                <div class="fieldset fieldset-range">
+                    <div class="form_radio_btn">
+                        <input class="item-settings" type="radio" value="day" id="day" name="group-range" checked>
+                        <label for="day">По дням</label>
+                    </div>
+                    <div class="form_radio_btn">
+                        <input class="item-settings" type="radio" value="hour" id="hour" name="group-range">
+                        <label for="hour">По 3 часа</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-group charts">
+                <canvas id="chart">
+                </canvas>
+            </div>
+        </div>
+        <div id="popup-info" class="popup">
+            <div class="popup-body">
+                <div class="popup-content">
+
+                </div>
+            </div>
+        </div>`
+    },
         url: `weather#${id}`
     }
 }

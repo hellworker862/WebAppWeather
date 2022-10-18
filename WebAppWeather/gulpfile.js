@@ -1,6 +1,7 @@
 /// <binding />
-import gulp from "gulp"
+import gulp from "gulp";
 import { path } from "./static/gulp/config/path.js";
+
 
 global.app = {
     path: path,
